@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### local PostgreSQL ###
+/docker/db-data/
+/docker/.env
