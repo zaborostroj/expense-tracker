@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:55432/auth_db
+    username: postgres
+    password: postgres
+  liquibase:
+    change-log: classpath:/config/liquibase/db.changelog-master.xml
+    enabled: true
