@@ -7,16 +7,16 @@
 
     <changeSet id="001-create-users-table" author="auth-service">
         <createTable schemaName="auth" tableName="users">
-            <column name="id" type="UUID">
+            <column name="uuid" type="UUID">
                 <constraints primaryKey="true" primaryKeyName="pk_users" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="uq_users_name"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
+            <column name="email" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="uq_users_email"/>
             </column>
-            <column name="password_hash" type="VARCHAR(255)">
+            <column name="password_hash" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="TIMESTAMP">
