@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.UUID;
 
 @Service
@@ -26,6 +27,7 @@ public class AuthService {
 
         User user;
         try {
+            var s = passwordEncoder.encode("123");
             CharSequence password = CharBuffer.wrap(request.getPassword());
             user = new User(
                     UUID.randomUUID(),
@@ -37,7 +39,7 @@ public class AuthService {
                     null
             );
         } finally {
-            request.setPassword(null);
+            Arrays.fill(request.getPassword(), '\0');
         }
 
         userService.save(user);
@@ -55,7 +57,7 @@ public class AuthService {
                 throw new InvalidCredentialsException("Invalid email or password");
             }
         } finally {
-            request.setPassword(null);
+            Arrays.fill(request.getPassword(), '\0');
         }
 
         String token = jwtProvider.generateToken(user.getUuid(), user.getEmail());

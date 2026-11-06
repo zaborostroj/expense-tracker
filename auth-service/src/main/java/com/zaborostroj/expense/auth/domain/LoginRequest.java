@@ -1,7 +1,9 @@
 package com.zaborostroj.expense.auth.domain;
 
+import com.zaborostroj.expense.auth.util.PasswordConstraintsValidated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -11,6 +13,7 @@ public class LoginRequest {
     @Email(message = "Email must be valid")
     private String email;
 
-//    @NotBlank(message = "Password is required")
+    @NotNull
+    @PasswordConstraintsValidated
     private char[] password;
 }

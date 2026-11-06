@@ -1,8 +1,10 @@
 package com.zaborostroj.expense.auth.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zaborostroj.expense.auth.util.PasswordConstraintsValidated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -17,8 +19,8 @@ public class RegisterRequest {
     @Email(message = "Email must be valid")
     private String email;
 
-//    @NotBlank(message = "Password is required")
-//    @Size(min = 9, max = 50, message = "Password must be between 9 and 50 characters")
+    @NotNull(message = "Password is required")
+    @PasswordConstraintsValidated
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private char[] password;
 }
