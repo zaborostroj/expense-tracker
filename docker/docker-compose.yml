@@ -7,6 +7,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       AUTH_APP_PASSWORD: ${AUTH_APP_PASSWORD}
+      EXPENSES_APP_PASSWORD: ${EXPENSES_APP_PASSWORD}
     ports:
       - "55432:5432"
     volumes:
