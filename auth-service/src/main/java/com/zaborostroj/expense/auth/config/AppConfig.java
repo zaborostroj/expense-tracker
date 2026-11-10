@@ -1,5 +1,7 @@
 package com.zaborostroj.expense.auth.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zaborostroj.expense.auth.domain.ErrorResponse;
 import com.zaborostroj.expense.auth.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +39,12 @@ public class AppConfig {
                         .authenticationEntryPoint((req, resp, authEx) -> {
                             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
                             resp.setContentType("application/json");
-                            resp.getWriter().write("{\"error\":\"Unauthorized\",\"message\":\"" + authEx.getMessage() + "\"}");
+                            new ObjectMapper().writeValue(resp.getWriter(), new ErrorResponse("Unauthorized", authEx.getMessage()));
+                        })
+                        .accessDeniedHandler((req, resp, accessEx) -> {
+                            resp.setStatus(HttpStatus.FORBIDDEN.value());
+                            resp.setContentType("application/json");
+                            new ObjectMapper().writeValue(resp.getWriter(), new ErrorResponse("AccessDenied", "You do not have permission to access this resource"));
                         })
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
