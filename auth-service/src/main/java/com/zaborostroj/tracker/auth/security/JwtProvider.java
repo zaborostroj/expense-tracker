@@ -26,12 +26,12 @@ public class JwtProvider {
         this.expiration = expiration;
     }
 
-    public String generateToken(UUID userId, String email) {
+    public String generateToken(UUID userUuid, String email) {
         Date now = new Date();
         Date expireDate = new Date(now.getTime() + this.expiration);
 
         return Jwts.builder()
-                .subject(userId.toString())
+                .subject(userUuid.toString())
                 .claim("email", email)
                 .issuedAt(now)
                 .expiration(expireDate)
@@ -39,7 +39,7 @@ public class JwtProvider {
                 .compact();
     }
 
-    public UUID getUserIdFromToken(String token) {
+    public UUID getUserUuidFromToken(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(this.secretKey)
                 .build()
@@ -72,7 +72,7 @@ public class JwtProvider {
 
     public UUID introspectToken(String token) {
         try {
-            return getUserIdFromToken(token);
+            return getUserUuidFromToken(token);
         } catch (JwtException | IllegalArgumentException e) {
             return null;
         }

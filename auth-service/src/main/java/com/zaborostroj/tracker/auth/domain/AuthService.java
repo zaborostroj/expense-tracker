@@ -65,10 +65,10 @@ public class AuthService {
     }
 
     public IntrospectionResponse introspectToken(String token) {
-        UUID userId = jwtProvider.introspectToken(token);
-        if (userId == null) {
+        UUID userUuid = jwtProvider.introspectToken(token);
+        if (userUuid == null) {
             return new IntrospectionResponse(false, null);
         }
-        return new IntrospectionResponse(true, userId);
+        return new IntrospectionResponse(true, userUuid);
     }
 }

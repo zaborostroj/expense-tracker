@@ -36,7 +36,7 @@ public class JwtProviderTest {
         String email = "test@example.com";
         String token = jwtProvider.generateToken(userId, email);
 
-        UUID extractedId = jwtProvider.getUserIdFromToken(token);
+        UUID extractedId = jwtProvider.getUserUuidFromToken(token);
 
         assertEquals(userId, extractedId);
     }

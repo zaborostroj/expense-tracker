@@ -9,5 +9,5 @@ import java.util.UUID;
 @Getter
 public class IntrospectionResponse {
     private boolean active;
-    private UUID userId;
+    private UUID userUuid;
 }

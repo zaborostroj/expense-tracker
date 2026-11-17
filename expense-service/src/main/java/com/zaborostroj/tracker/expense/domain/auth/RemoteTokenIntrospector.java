@@ -47,11 +47,11 @@ public class RemoteTokenIntrospector implements OpaqueTokenIntrospector {
 
     private static @NonNull OAuth2AuthenticatedPrincipal extractPrincipal(IntrospectionResponse response) {
         Map<String, Object> attributes = Map.of(
-                "sub", String.valueOf(response.getUserId()),
-                "userId", response.getUserId()
+                "sub", String.valueOf(response.getUserUuid()),
+                "userUuid", response.getUserUuid()
         );
         return new DefaultOAuth2AuthenticatedPrincipal(
-                String.valueOf(response.getUserId()),
+                String.valueOf(response.getUserUuid()),
                 attributes,
                 Collections.emptyList()
         );
