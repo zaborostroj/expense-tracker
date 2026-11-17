@@ -1,5 +1,6 @@
 package com.zaborostroj.tracker.auth.domain;
 
+import com.zaborostroj.tracker.auth.domain.introspection.IntrospectionResponse;
 import com.zaborostroj.tracker.auth.exception.InvalidCredentialsException;
 import com.zaborostroj.tracker.auth.exception.UserAlreadyExistsException;
 import com.zaborostroj.tracker.auth.security.JwtProvider;
@@ -61,5 +62,13 @@ public class AuthService {
 
         String token = jwtProvider.generateToken(user.getUuid(), user.getEmail());
         return new TokenResponse(token);
+    }
+
+    public IntrospectionResponse introspectToken(String token) {
+        UUID userId = jwtProvider.introspectToken(token);
+        if (userId == null) {
+            return new IntrospectionResponse(false, null);
+        }
+        return new IntrospectionResponse(true, userId);
     }
 }

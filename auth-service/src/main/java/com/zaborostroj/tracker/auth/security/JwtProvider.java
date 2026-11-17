@@ -69,4 +69,12 @@ public class JwtProvider {
             return false;
         }
     }
+
+    public UUID introspectToken(String token) {
+        try {
+            return getUserIdFromToken(token);
+        } catch (JwtException | IllegalArgumentException e) {
+            return null;
+        }
+    }
 }

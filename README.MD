@@ -15,3 +15,5 @@ Stack
 Environment vars
 
 - JWT_SECRET - секрет для создания JWT
+- AUTH_INTERNAL_USER_NAME - имя пользователя для межсервисных запросов
+- AUTH_INTERNAL_PASSWORD - пароль для межсервисных запросов

@@ -84,7 +84,7 @@ class AuthServiceTest {
     void register_withNewUser_shouldCreateUserAndReturnToken() {
         // Given
         when(userService.existsByEmail(anyString())).thenReturn(false);
-        when(passwordEncoder.encode(anyString())).thenReturn(PASSWORD_HASH);
+        when(passwordEncoder.encode(any(CharSequence.class))).thenReturn(PASSWORD_HASH);
         when(jwtProvider.generateToken(any(UUID.class), anyString())).thenReturn(JWT_TOKEN);
 
         // When
