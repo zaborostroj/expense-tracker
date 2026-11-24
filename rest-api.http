@@ -1,0 +1,70 @@
+###
+DELETE http://localhost:8082/api/expense/faf046f4-96b2-456d-8d76-8e94d9082f24
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+<> 2026-11-24T111155.500.json
+
+###
+PUT http://localhost:8082/api/expense/a8bbaa85-5deb-4d82-b19c-b2f3a72e88ca
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "amount": 200.00,
+  "category": "43",
+  "description": "43",
+  "spentAt": "2026-11-02T00:00:01Z"
+}
+
+<> 2026-11-24T112013.200.json
+
+###
+GET http://localhost:8082/api/expense/month/2026-11
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+<> 2026-11-24T112020.200.json
+<> 2026-11-24T111903.200.json
+<> 2026-11-24T111821.200.json
+<> 2026-11-24T111804.200.json
+
+###
+POST http://localhost:8082/api/expense
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "amount": 100.00,
+  "category": "42",
+  "description": "test",
+  "spentAt": "2026-11-01T00:00:01.0Z"
+}
+
+<> 2026-11-24T111827.201.json
+
+###
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@mail.com",
+  "password": "Qweqwe!23"
+}
+> {%
+    if (response.status === 200 && response.body.token) {
+        client.global.set("auth_token", response.body.token);
+    }
+%}
+
+###
+POST http://localhost:8081/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "user",
+  "email": "user@mail.com",
+  "password": "Qweqwe!23"
+}
+
+
