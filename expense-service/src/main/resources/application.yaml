@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:55432/expenses_db
+    username: postgres
+    password: postgres
+  liquibase:
+    change-log: classpath:/config/liquibase/db.changelog-master.xml
+    enabled: true
+server:
+  port: 8082
+
+auth:
+  internal:
+    url: http://localhost:8081
+    username: ${AUTH_INTERNAL_USER_NAME}
+    password: ${AUTH_INTERNAL_PASSWORD}

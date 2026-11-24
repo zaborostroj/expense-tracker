@@ -9,3 +9,9 @@ spring:
 jwt:
   secret: ${JWT_SECRET}
   expiration: 86400000
+auth:
+  internal:
+    username: ${AUTH_INTERNAL_USER_NAME}
+    password: ${AUTH_INTERNAL_PASSWORD}
+server:
+  port: 8081

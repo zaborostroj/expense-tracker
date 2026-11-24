@@ -18,6 +18,7 @@
 
     <modules>
         <module>auth-service</module>
+        <module>expense-service</module>
     </modules>
 
     <properties>
